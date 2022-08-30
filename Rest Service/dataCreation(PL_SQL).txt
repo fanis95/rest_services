@@ -1,0 +1,44 @@
+DROP SEQUENCE friend_seq RESTRICT
+DROP SEQUENCE post_seq RESTRICT
+DROP SEQUENCE profile_seq RESTRICT
+drop table posts
+drop table profile 
+drop table friends
+drop table users
+
+create table users(
+U_ID VARCHAR(25) not null primary key,
+password varchar(25) not null
+)
+
+create table friends(
+f_id int not null primary key,
+u_id1 varchar(25),
+u_id2 varchar(25),
+foreign key (u_id1) references users(u_id),
+foreign key (u_id2) references users(u_id)
+)
+
+
+create table profile(
+p_id int not null primary key,
+u_id varchar(25),
+foreign key (u_id) references users(u_id)
+)
+
+
+create table posts(
+post_id int not null primary key,
+p_id int ,
+u_id varchar(25),
+description varchar(200) not null,
+foreign key (u_id) references users(u_id),
+foreign key (p_id) references profile(p_id)
+)
+
+
+CREATE SEQUENCE friend_seq START WITH 1;
+CREATE SEQUENCE post_seq START WITH 1;
+CREATE SEQUENCE profile_seq START WITH 1;
+
+
